@@ -114,6 +114,7 @@
                 $(this).parent('.item-group__item').addClass('selected');
                 
                 $('#indicator').css({ left: $(e.target).position().left + 4 });
+                e.preventDefault();
             }
         }
 
