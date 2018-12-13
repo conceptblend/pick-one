@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pick one...</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css">
+        body {
+            font-family: Helvetica, sans-serif;
+            margin: 15px;
+        }
+
+
+        .demo-container {
+            width: 100%;
+            /*max-width: 375px;*/
+            margin: 0 auto;
+        }
+        h1 {
+            margin: 2.4rem 0 1.5rem;
+            font-size: 2.8rem;
+            letter-spacing: -0.04rem;
+            line-height: 3rem;
+            font-weight: bold;
+            color: #0c2340;
+        }
+        .item-group-container {
+            /*
+            background-color: #f2f2f2;
+            border-radius: 28px;
+            */
+            padding: 4px;
+            display: block;
+            position: relative;
+        }
+        
+        .selection-indicator {
+            display: block;
+            position: absolute;
+            background-color: #00b398;
+            height: 48px;
+            width: 33%;
+            border-radius: 24px;
+            z-index: 99;
+            left: 4px;
+            box-shadow: 0 1px 4px 2px rgba(128,128,128, .3);
+            transition: left 500ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .divider {
+            position: absolute;
+            top: 25%;
+            width: 2px;
+            height: 50%;
+            background-color: rgba(255,255,255,.7);
+        }
+
+        .item-group {
+            /* invisible but settings for children? */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            z-index: 999;
+        }
+
+        .item-group__item {
+            font-size: 18px;
+            font-weight: bold;
+            height: 48px;
+            line-height: 48px;
+            width: calc(33.3% - 2px);
+            margin-right: 2px;
+            text-align: center;
+            background-color: #f2f2f2;
+            border-radius: 2px;
+            transition: margin 500ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .item-group__item:first-of-type {
+            border-radius: 24px 2px 2px 24px;
+        }
+
+        .item-group__item:last-of-type {
+            border-radius: 2px 24px 24px 2px;
+            margin-right: 0;
+        }
+        .item-group__item.selected {
+            background-color: #00b398;
+            margin-top: -4px;
+            box-shadow: 0 3px 6px 1px rgba(128,128,128, .3)
+            
+        }
+        .item-group__item a {
+            color: #0c2340;
+            text-decoration: none;
+            display: block;
+            transition: color 500ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .item-group__item.selected a {
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo-container">
+        <h1>Pick one...</h1>
+        <div class="item-group-container">
+            <!--div class="divider" style="left: calc(33.3% - 2px);"></div>
+            <div class="divider" style="left: calc(66.6% - 2px);"></div>
+            <div class="selection-indicator" id="indicator"></div-->
+            <ul class="item-group clearfix">
+                <li class="item-group__item selected"><a href="#1">$1</a></li>
+                <li class="item-group__item"><a href="#2">$2</a></li>
+                <li class="item-group__item"><a href="#5">$5</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var el = document.querySelectorAll('.item-group__item > a');
+        for (var n=0, len=el.length; n<len; n++) {
+            el[n].onclick = function (e) {
+                console.log($(e.target).position().left);
+                $('.item-group__item').removeClass('selected');
+                $(this).parent('.item-group__item').addClass('selected');
+                
+                $('#indicator').css({ left: $(e.target).position().left + 4 });
+            }
+        }
+
+    </script>
+</body>
+
+</html>
